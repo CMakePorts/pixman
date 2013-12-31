@@ -1,0 +1,61 @@
+# Checking Headers and Functions for cairo
+
+add_definitions(-DHAVE_CONFIG_H)
+
+include( CheckIncludeFile )
+include( CheckFunctionExists )
+include( CheckLibraryExists )
+include( CheckTypeSize)
+
+if(WIN32)
+    set(SHARED_LIB_EXT dll)
+    if(MSVC)
+        set( CMAKE_REQUIRED_INCLUDES ${CMAKE_INCLUDE_PATH} ${CMAKE_INCLUDE_PATH}/msvc )
+    else(MSVC)
+        set( CMAKE_REQUIRED_INCLUDES ${CMAKE_INCLUDE_PATH} ${CMAKE_INCLUDE_PATH}/mingw )
+    endif(MSVC)
+endif(WIN32)
+
+set( CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES})
+set( CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES} )
+
+if(PNG_FOUND)
+	set(HAVE_LIBPNG 1)
+endif()
+
+if(THREADS_FOUND)
+	set(HAVE_PTHREADS 1)
+endif()
+
+check_include_file( "dlfcn.h" HAVE_DLFCN_H )
+check_include_file( "fenv.h" HAVE_FENV_H )
+check_include_file( "inttypes.h" HAVE_INTTYPES_H )
+check_include_file( "memory.h" HAVE_MEMORY_H )
+check_include_file( "stdint.h" HAVE_STDINT_H )
+check_include_file( "stdlib.h" HAVE_STDLIB_H )
+check_include_file( "strings.h" HAVE_STRINGS_H )
+check_include_file( "string.h" HAVE_STRING_H )
+check_include_file( "sys/mman.h" HAVE_SYS_MMAN_H )
+check_include_file( "sys/stat.h" HAVE_SYS_STAT_H )
+check_include_file( "sys/types.h" HAVE_SYS_TYPES_H )
+check_include_file( "unistd.h" HAVE_UNISTD_H )
+
+check_function_exists( __builtin_clz HAVE_BUILTIN_CLZ )
+check_function_exists( alarm HAVE_ALARM )
+check_function_exists( feenableexcept HAVE_FEENABLEEXCEPT )
+check_function_exists( getisax HAVE_GETISAX )
+check_function_exists( getpagesize HAVE_GETPAGESIZE )
+check_function_exists( gettimeofday HAVE_GETTIMEOFDAY )
+check_function_exists( mmap HAVE_MMAP )
+check_function_exists( mprotect HAVE_MPROTECT )
+check_function_exists( posix_memalign HAVE_POSIX_MEMALIGN )
+check_function_exists( sigaction HAVE_SIGACTION )
+
+CHECK_TYPE_SIZE("long"       SIZEOF_LONG)
+CHECK_TYPE_SIZE("__float128" SIZEOF___FLOAT128)
+if(SIZEOF___FLOAT128)
+	set(HAVE_FLOAT128 1)
+endif()
+
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/pixman/config.h )

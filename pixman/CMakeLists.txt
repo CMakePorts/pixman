@@ -64,6 +64,10 @@ if(SSSE3_VAR)
     list(APPEND SOURCES pixman-ssse3.c.c)
 endif()
 
+IF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
+	set(CMAKE_C_FLAGS -fPIC)
+ENDIF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32) 
+
 add_library(pixman-1 STATIC ${SOURCES} ${HEADERS})
 target_link_libraries(pixman-1)
 
