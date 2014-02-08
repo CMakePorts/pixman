@@ -122,37 +122,37 @@
 #cmakedefine TOOLCHAIN_SUPPORTS_ATTRIBUTE_CONSTRUCTOR
 
 /* use ARM IWMMXT compiler intrinsics */
-#cmakedefine USE_ARM_IWMMXT
+#cmakedefine USE_ARM_IWMMXT @USE_ARM_IWMMXT@
 
 /* use ARM NEON assembly optimizations */
-#cmakedefine USE_ARM_NEON
+#cmakedefine USE_ARM_NEON @USE_ARM_NEON@
 
 /* use ARM SIMD assembly optimizations */
-#cmakedefine USE_ARM_SIMD
+#cmakedefine USE_ARM_SIMD @USE_ARM_SIMD@
 
 /* use GNU-style inline assembler */
 #cmakedefine USE_GCC_INLINE_ASM
 
 /* use Loongson Multimedia Instructions */
-#cmakedefine USE_LOONGSON_MMI
+#cmakedefine USE_LOONGSON_MMI @USE_LOONGSON_MMI@
 
 /* use MIPS DSPr2 assembly optimizations */
-#cmakedefine USE_MIPS_DSPR2
+#cmakedefine USE_MIPS_DSPR2 @USE_MIPS_DSPR2@
 
 /* use OpenMP in the test suite */
 #cmakedefine USE_OPENMP
 
 /* use SSE2 compiler intrinsics */
-#cmakedefine USE_SSE2
+#cmakedefine USE_SSE2 @USE_SSE2@
 
 /* use SSSE3 compiler intrinsics */
-#cmakedefine USE_SSSE3
+#cmakedefine USE_SSSE3 @USE_SSSE3@
 
 /* use VMX compiler intrinsics */
-#cmakedefine USE_VMX
+#cmakedefine USE_VMX @USE_VMX@
 
 /* use x86 MMX compiler intrinsics */
-#cmakedefine USE_X86_MMX
+#cmakedefine USE_X86_MMX @USE_X86_MMX@
 
 /* Version number of package */
 #cmakedefine VERSION
@@ -174,6 +174,3 @@
 #ifndef __cplusplus
 #undef inline
 #endif
-
-/* Define to sqrt if you do not have the `sqrtf' function. */
-#undef sqrtf

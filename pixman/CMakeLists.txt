@@ -8,16 +8,12 @@ set(SOURCES
     pixman-combine32.c
     pixman-combine-float.c
     pixman-conical-gradient.c
-    pixman-filter.c
-    pixman-x86.c
-    pixman-mips.c
-    pixman-arm.c
-    pixman-ppc.c
     pixman-edge.c
     pixman-edge-accessors.c
     pixman-fast-path.c
-    pixman-glyph.c
+    pixman-filter.c
     pixman-general.c
+    pixman-glyph.c
     pixman-gradient-walker.c
     pixman-image.c
     pixman-implementation.c
@@ -43,26 +39,43 @@ set(HEADERS
     pixman-private.h
 )
 
-# MMX compilation flags
-if(MMX_VAR)
-    set(MMX_CFLAGS -DUSE_X86_MMX -w14710 -w14714)
-    add_definitions(${MMX_CFLAGS})
-    list(APPEND SOURCES pixman-mmx.c)
-endif()
+#proccesor_optimizations
+if(ARM)
+    list(APPEND SOURCES "pixman-arm.c")
+    if (ARM_NEON)
+        list(APPEND SOURCES "pixman-arm-neon.c")
+    endif (ARM_NEON)
+    if (ARM_SIMD)
+        list(APPEND SOURCES "pixman-arm-simd.c")
+    endif (ARM_SIMD)
+endif(ARM)   
 
-# SSE2 compilation flags
-if(SSE2_VAR)
-    set(SSE2_CFLAGS -DUSE_SSE2)
-    add_definitions(${SSE2_CFLAGS})
-    list(APPEND SOURCES pixman-sse2.c)
-endif()
+if(MIPS)
+    list(APPEND SOURCES "pixman-mips.c")
+    if (MIPS_DSPR2)
+        list(APPEND SOURCES "pixman-mips-dspr2.c")
+    endif (MIPS_DSPR2)
+endif(MIPS)  
 
-# SSSE3 compilation flags
-if(SSSE3_VAR)
-    set(SSSE3_CFLAGS -DUSE_SSSE3)
-    add_definitions(${SSE2_CFLAGS})
-    list(APPEND SOURCES pixman-ssse3.c.c)
-endif()
+if(PPC)
+    list(APPEND SOURCES "pixman-ppc.c")
+    if (PPC_VMX)
+        list(APPEND SOURCES "pixman-vmx.c")
+    endif (PPC_VMX)
+endif(PPC)  
+
+if(X86)
+    list(APPEND SOURCES "pixman-x86.c")
+    if (X86_MMX)
+        list(APPEND SOURCES "pixman-mmx.c")
+    endif (X86_MMX)
+    if (X86_SSE2)
+        list(APPEND SOURCES "pixman-sse2.c")
+    endif (X86_SSE2)
+    if (X86_SSSE3)
+        list(APPEND SOURCES "pixman-ssse3.c")
+    endif(X86_SSSE3)
+endif(X86)
 
 IF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
 	set(CMAKE_C_FLAGS -fPIC)
