@@ -13,8 +13,8 @@ string (REGEX REPLACE ".*pixman_micro], ([0-9]+).*" "\\1" PIXMAN_VERSION_MICRO $
 include(${CMAKE_SOURCE_DIR}/cmake/TargetArch.cmake)
 target_architecture(ARCHITECTURE)
 
-# architecture set
-if(ARCHITECTURE STREQUAL "i386" OR "x86_64") 
+#options for arch
+if(ARCHITECTURE STREQUAL "i386" OR ARCHITECTURE STREQUAL "x86_64") 
     SET(X86 1)
     OPTION(X86_MMX "Enable MMX optimizations" OFF)
     OPTION(X86_SSE2 "Enable SSE2 optimizations" OFF)
@@ -24,14 +24,14 @@ elseif(ARCHITECTURE STREQUAL "arm")
     OPTION(ARM_IWMMXT "Enable IWMMXT compiler intrinsics" OFF)
     OPTION(ARM_NEON "Enable NEON optimizations" OFF)
     OPTION(ARM_SIMD "Enable SIMD optimizations" OFF)
-elseif(ARCHITECTURE STREQUAL "ppc" OR "ppc64")
+elseif(ARCHITECTURE STREQUAL "ppc" OR ARCHITECTURE STREQUAL "ppc64")
     SET(PPC 1)
     OPTION(PPC_VMX "Enable VMX optimizations" OFF)
 else()
     SET(MIPS 1)
     OPTION(MIPS_DSPR2 "Enable DSPR2 optimizations" OFF)
     OPTION(MIPS_LOONGSON_MMI  "Enable Loongson Multimedia Instructions" OFF)
-endif(ARCHITECTURE STREQUAL "i386" OR "x86_64")
+endif(ARCHITECTURE STREQUAL "i386" OR ARCHITECTURE STREQUAL "x86_64")
 
 find_package(PNG)
 find_package(Threads)
