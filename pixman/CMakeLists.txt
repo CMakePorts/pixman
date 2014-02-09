@@ -4,6 +4,7 @@ set(SOURCES
     pixman.c
     pixman-access.c
     pixman-access-accessors.c
+    pixman-arm.c
     pixman-bits-image.c
     pixman-combine32.c
     pixman-combine-float.c
@@ -19,7 +20,9 @@ set(SOURCES
     pixman-implementation.c
     pixman-linear-gradient.c
     pixman-matrix.c
+    pixman-mips.c
     pixman-noop.c
+    pixman-ppc.c
     pixman-radial-gradient.c
     pixman-region16.c
     pixman-region32.c
@@ -27,6 +30,7 @@ set(SOURCES
     pixman-timer.c
     pixman-trap.c
     pixman-utils.c
+    pixman-x86.c
 )
 
 set(HEADERS
@@ -41,7 +45,6 @@ set(HEADERS
 
 #proccesor_optimizations
 if(ARM)
-    list(APPEND SOURCES "pixman-arm.c")
     if (ARM_NEON)
         list(APPEND SOURCES "pixman-arm-neon.c")
     endif (ARM_NEON)
@@ -51,21 +54,18 @@ if(ARM)
 endif(ARM)   
 
 if(MIPS)
-    list(APPEND SOURCES "pixman-mips.c")
     if (MIPS_DSPR2)
         list(APPEND SOURCES "pixman-mips-dspr2.c")
     endif (MIPS_DSPR2)
 endif(MIPS)  
 
 if(PPC)
-    list(APPEND SOURCES "pixman-ppc.c")
     if (PPC_VMX)
         list(APPEND SOURCES "pixman-vmx.c")
     endif (PPC_VMX)
 endif(PPC)  
 
 if(X86)
-    list(APPEND SOURCES "pixman-x86.c")
     if (X86_MMX)
         list(APPEND SOURCES "pixman-mmx.c")
     endif (X86_MMX)
