@@ -99,3 +99,4 @@ endif(X86_SSSE3)
 
 configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/cmake/config_source.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/cmake/config_source.cmake ${CMAKE_CURRENT_BINARY_DIR}/pixman/config.h )
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/pixman/pixman-version.h.in ${CMAKE_CURRENT_BINARY_DIR}/pixman-version.h)

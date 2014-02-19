@@ -21,6 +21,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/config_configure.cmake)
 
 option(BUILD_SHARED "build shared library" ON)
 option(BUILD_STATIC "build static library" OFF)
+option(BUILD_TESTS "build tests" OFF)
 
 include_directories(
 	${CMAKE_BINARY_DIR}
@@ -28,4 +29,9 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/pixman
 )
 
-add_subdirectory(pixman)
+if(BUILD_SHARED OR BUILD_STATIC)
+    add_subdirectory(pixman)
+endif()
+if(BUILD_TESTS)
+    add_subdirectory(test)
+endif(BUILD_TESTS)

@@ -1,5 +1,3 @@
-configure_file(pixman-version.h.in ${CMAKE_CURRENT_BINARY_DIR}/pixman-version.h)
-
 set(SOURCES
     pixman.c
     pixman-access.c
@@ -83,7 +81,6 @@ ENDIF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
 
 if(BUILD_SHARED)
     add_library(pixman-1 SHARED ${SOURCES} ${HEADERS})
-    target_link_libraries(pixman-1)
     install(TARGETS pixman-1 RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
 endif()
 
@@ -92,7 +89,6 @@ if(BUILD_STATIC)
     if(NOT MSVC)
         set_target_properties(pixman-1_static PROPERTIES OUTPUT_NAME pixman-1)
     endif(NOT MSVC)
-    target_link_libraries(pixman-1_static)
     install(TARGETS pixman-1_static RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
 endif(BUILD_STATIC)
 
