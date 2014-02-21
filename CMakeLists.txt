@@ -20,7 +20,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/arch_configure.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/config_configure.cmake)
 
 option(BUILD_SHARED "build shared library" ON)
-option(BUILD_STATIC "build static library" OFF)
+option(BUILD_STATIC "build static library" ON)
 option(BUILD_TESTS "build tests" OFF)
 
 include_directories(
