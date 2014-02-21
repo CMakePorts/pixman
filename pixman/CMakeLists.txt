@@ -79,13 +79,15 @@ IF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
 	set(CMAKE_C_FLAGS -fPIC)
 ENDIF(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32) 
 
+add_library (pixman-1_core OBJECT  ${SOURCES} ${HEADERS})
+
 if(BUILD_SHARED)
-    add_library(pixman-1 SHARED ${SOURCES} ${HEADERS})
-    install(TARGETS pixman-1 RUNTIME DESTINATION bin ARCHIVE DESTINATION lib)
+    add_library(pixman-1 SHARED $<TARGET_OBJECTS:pixman-1_core>)
+    install(TARGETS pixman-1 RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 endif()
 
 if(BUILD_STATIC)
-    add_library(pixman-1_static STATIC ${SOURCES} ${HEADERS})
+    add_library(pixman-1_static STATIC $<TARGET_OBJECTS:pixman-1_core>)
     if(NOT MSVC)
         set_target_properties(pixman-1_static PROPERTIES OUTPUT_NAME pixman-1)
     endif(NOT MSVC)

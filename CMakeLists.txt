@@ -1,6 +1,6 @@
 project(pixman)
 set(PACKAGE pixman)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.8)
 
 # detect version
 file (READ configure.ac configure_ac)
