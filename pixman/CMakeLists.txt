@@ -2,25 +2,26 @@ set(SOURCES
     pixman.c
     pixman-access.c
     pixman-access-accessors.c
-    pixman-arm.c
     pixman-bits-image.c
     pixman-combine32.c
     pixman-combine-float.c
     pixman-conical-gradient.c
+    pixman-filter.c
+    pixman-x86.c
+    pixman-mips.c
+    pixman-arm.c
+    pixman-ppc.c
     pixman-edge.c
     pixman-edge-accessors.c
     pixman-fast-path.c
-    pixman-filter.c
-    pixman-general.c
     pixman-glyph.c
+    pixman-general.c
     pixman-gradient-walker.c
     pixman-image.c
     pixman-implementation.c
     pixman-linear-gradient.c
     pixman-matrix.c
-    pixman-mips.c
     pixman-noop.c
-    pixman-ppc.c
     pixman-radial-gradient.c
     pixman-region16.c
     pixman-region32.c
@@ -28,7 +29,6 @@ set(SOURCES
     pixman-timer.c
     pixman-trap.c
     pixman-utils.c
-    pixman-x86.c
 )
 
 set(HEADERS
@@ -44,17 +44,32 @@ set(HEADERS
 #proccesor_optimizations
 if(ARM)
     if (ARM_NEON)
-        list(APPEND SOURCES "pixman-arm-neon.c")
+        list(APPEND SOURCES pixman-arm-neon.c
+                            pixman-arm-neon-asm.S
+                            pixman-arm-neon-asm-bilinear.S
+        )
     endif (ARM_NEON)
     if (ARM_SIMD)
-        list(APPEND SOURCES "pixman-arm-simd.c")
+        list(APPEND SOURCES pixman-arm-simd.c
+                            pixman-arm-simd-asm.S
+                            pixman-arm-simd-asm-scaled.S
+        )
     endif (ARM_SIMD)
+    if (ARM_IWMMXT)
+        list(APPEND SOURCES "pixman-mmx.c")
+    endif()
 endif(ARM)   
 
 if(MIPS)
     if (MIPS_DSPR2)
-        list(APPEND SOURCES "pixman-mips-dspr2.c")
+        list(APPEND SOURCES pixman-mips-dspr2.c
+                            pixman-mips-dspr2-asm.S
+                            pixman-mips-memcpy-asm.S
+        )
     endif (MIPS_DSPR2)
+    if (MIPS_LOONGSON_MMI)
+        list(APPEND SOURCES "pixman-mmx.c")
+    endif()
 endif(MIPS)  
 
 if(PPC)
@@ -76,7 +91,7 @@ if(X86)
 endif(X86)
 
 IF(UNIX)
-	set(CMAKE_C_FLAGS -fPIC)
+    set(CMAKE_C_FLAGS -fPIC)
 ENDIF(UNIX) 
 
 add_library (pixman-1_core OBJECT  ${SOURCES} ${HEADERS})
