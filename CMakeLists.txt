@@ -7,10 +7,20 @@ file (READ configure.ac configure_ac)
 string (REGEX REPLACE ".*pixman_major], ([0-9]+).*" "\\1" PIXMAN_VERSION_MAJOR ${configure_ac})
 string (REGEX REPLACE ".*pixman_minor], ([0-9]+).*" "\\1" PIXMAN_VERSION_MINOR ${configure_ac})
 string (REGEX REPLACE ".*pixman_micro], ([0-9]+).*" "\\1" PIXMAN_VERSION_MICRO ${configure_ac})
+set(PIXMAN_VERSION "${PIXMAN_VERSION_MAJOR}${PIXMAN_VERSION_MINOR}${PIXMAN_VERSION_MICRO}")
 
-#deps
-find_package(PNG)
+option(BUILD_SHARED "build shared library" ON)
+option(BUILD_STATIC "build static library" ON)
+if(BUILD_STATIC)
+    option(BUILD_TESTS "build tests" OFF)
+endif()
+
+#dependencies
 find_package(Threads)
+if(BUILD_TESTS)
+    find_package(PNG)
+    find_package(OpenMP)
+endif()
 
 #arch optimizations
 include(${CMAKE_SOURCE_DIR}/cmake/arch_detect.cmake)
@@ -19,12 +29,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/arch_configure.cmake)
 #config
 include(${CMAKE_SOURCE_DIR}/cmake/config_configure.cmake)
 
-option(BUILD_SHARED "build shared library" ON)
-option(BUILD_STATIC "build static library" ON)
-option(BUILD_TESTS "build tests" OFF)
-
 include_directories(
-	${CMAKE_BINARY_DIR}
 	${CMAKE_BINARY_DIR}/pixman
 	${CMAKE_SOURCE_DIR}/pixman
 )
