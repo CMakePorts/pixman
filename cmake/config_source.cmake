@@ -113,7 +113,7 @@
 #cmakedefine SIZEOF_LONG @SIZEOF_LONG@
 
 /* Define to 1 if you have the ANSI C header files. */
-#cmakedefine STDC_HEADERS
+#cmakedefine STDC_HEADERS 1
 
 /* The compiler supported TLS storage class */
 #cmakedefine TLS
@@ -140,7 +140,7 @@
 #cmakedefine USE_MIPS_DSPR2 @USE_MIPS_DSPR2@
 
 /* use OpenMP in the test suite */
-#cmakedefine USE_OPENMP
+#cmakedefine USE_OPENMP @OPENMP_FOUND@
 
 /* use SSE2 compiler intrinsics */
 #cmakedefine USE_SSE2 @USE_SSE2@
@@ -155,7 +155,7 @@
 #cmakedefine USE_X86_MMX @USE_X86_MMX@
 
 /* Version number of package */
-#cmakedefine VERSION
+#cmakedefine VERSION @PIXMAN_VERSION@
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
