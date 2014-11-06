@@ -30,8 +30,8 @@ include(${CMAKE_SOURCE_DIR}/cmake/arch_configure.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/config_configure.cmake)
 
 include_directories(
-	${CMAKE_BINARY_DIR}/pixman
-	${CMAKE_SOURCE_DIR}/pixman
+    ${CMAKE_BINARY_DIR}/pixman
+    ${CMAKE_SOURCE_DIR}/pixman
 )
 
 if(MSVC)

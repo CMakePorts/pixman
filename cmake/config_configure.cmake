@@ -1,5 +1,4 @@
-# Checking Headers and Functions for cairo
-
+# Checking Headers and Functions for pixman
 add_definitions(-DHAVE_CONFIG_H)
 
 include( CheckIncludeFile )
@@ -7,24 +6,12 @@ include( CheckFunctionExists )
 include( CheckLibraryExists )
 include( CheckTypeSize)
 
-if(WIN32)
-    set(SHARED_LIB_EXT dll)
-    if(MSVC)
-        set( CMAKE_REQUIRED_INCLUDES ${CMAKE_INCLUDE_PATH} ${CMAKE_INCLUDE_PATH}/msvc )
-    else(MSVC)
-        set( CMAKE_REQUIRED_INCLUDES ${CMAKE_INCLUDE_PATH} ${CMAKE_INCLUDE_PATH}/mingw )
-    endif(MSVC)
-endif(WIN32)
-
-set( CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES})
-set( CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES} )
-
 if(PNG_FOUND)
-	set(HAVE_LIBPNG 1)
+    set(HAVE_LIBPNG 1)
 endif()
 
-if(THREADS_FOUND)
-	set(HAVE_PTHREADS 1)
+if(CMAKE_USE_PTHREADS_INIT)
+    set(HAVE_PTHREADS 1)
 endif()
 
 check_include_file( "dlfcn.h" HAVE_DLFCN_H )
@@ -54,7 +41,7 @@ check_function_exists( sigaction HAVE_SIGACTION )
 CHECK_TYPE_SIZE("long"       SIZEOF_LONG)
 CHECK_TYPE_SIZE("__float128" SIZEOF___FLOAT128)
 if(SIZEOF___FLOAT128)
-	set(HAVE_FLOAT128 1)
+    set(HAVE_FLOAT128 1)
 endif()
 
 if (ARM_IWMMXT)
