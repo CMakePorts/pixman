@@ -34,9 +34,14 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/pixman
 )
 
+if(MSVC)
+set(CMAKE_C_FLAGS "/wd4244 /wd4146 ${CMAKE_C_FLAGS}")
+endif()
+
 if(BUILD_SHARED OR BUILD_STATIC)
     add_subdirectory(pixman)
 endif()
+
 if(BUILD_TESTS)
     add_subdirectory(test)
 endif(BUILD_TESTS)
