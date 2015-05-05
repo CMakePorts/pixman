@@ -15,6 +15,11 @@ target_link_libraries(a1-trap-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_s
 add_test(a1-trap-test a1-trap-test)
 set_tests_properties (a1-trap-test PROPERTIES TIMEOUT 100)
 
+add_executable(affine-bench affine-bench.c $<TARGET_OBJECTS:tests_core>)
+target_link_libraries(affine-bench ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_static)
+add_test(affine-bench affine-bench)
+set_tests_properties (affine-bench PROPERTIES TIMEOUT 100)
+
 add_executable(affine-test affine-test.c $<TARGET_OBJECTS:tests_core>)
 target_link_libraries(affine-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_static)
 add_test(affine-test affine-test)
