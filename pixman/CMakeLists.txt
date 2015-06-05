@@ -107,7 +107,7 @@ add_library (pixman-1_core OBJECT ${SOURCES} ${HEADERS})
 
 if(BUILD_SHARED)
     add_library(pixman-1 SHARED $<TARGET_OBJECTS:pixman-1_core>)
-    install(TARGETS pixman-1 RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+    install(TARGETS pixman-1 EXPORT PixmanTargets RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 endif()
 
 if(BUILD_STATIC)
@@ -115,7 +115,7 @@ if(BUILD_STATIC)
     if(NOT MSVC)
         set_target_properties(pixman-1_static PROPERTIES OUTPUT_NAME pixman-1)
     endif(NOT MSVC)
-    install(TARGETS pixman-1_static RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+    install(TARGETS pixman-1_static EXPORT PixmanTargets RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 endif(BUILD_STATIC)
 
 install(FILES pixman.h ${CMAKE_CURRENT_BINARY_DIR}/pixman-version.h DESTINATION include/pixman-1)
