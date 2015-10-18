@@ -53,3 +53,4 @@ test/trap-crasher
 *.ilk
 *.obj
 *.exe
+build/
