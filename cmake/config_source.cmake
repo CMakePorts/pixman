@@ -154,6 +154,9 @@
 /* use x86 MMX compiler intrinsics */
 #cmakedefine USE_X86_MMX @USE_X86_MMX@
 
+/* use GCC Vector Extensions */
+#cmakedefine HAVE_GCC_VECTOR_EXTENSIONS @HAVE_GCC_VECTOR_EXTENSIONS@
+
 /* use OpenMP
 #cmakedefine USE_OPENMP @USE_OPENMP@
 

@@ -18,6 +18,10 @@ if(CMAKE_USE_PTHREADS_INIT)
     set(HAVE_PTHREADS 1)
 endif()
 
+if(CMAKE_COMPILER_IS_GNUCC)
+    set(HAVE_GCC_VECTOR_EXTENSION 1)
+endif()
+
 check_include_file( "dlfcn.h" HAVE_DLFCN_H )
 check_include_file( "fenv.h" HAVE_FENV_H )
 check_include_file( "inttypes.h" HAVE_INTTYPES_H )
