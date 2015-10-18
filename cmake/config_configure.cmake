@@ -6,6 +6,10 @@ include( CheckFunctionExists )
 include( CheckLibraryExists )
 include( CheckTypeSize)
 
+if(OPENMP_FOUND)
+    set(USE_OPENMP 1)
+endif()
+
 if(PNG_FOUND)
     set(HAVE_LIBPNG 1)
 endif()

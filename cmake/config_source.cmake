@@ -154,6 +154,9 @@
 /* use x86 MMX compiler intrinsics */
 #cmakedefine USE_X86_MMX @USE_X86_MMX@
 
+/* use OpenMP
+#cmakedefine USE_OPENMP @USE_OPENMP@
+
 /* Version number of package */
 #cmakedefine VERSION @PIXMAN_VERSION@
 
