@@ -19,7 +19,7 @@ if(CMAKE_USE_PTHREADS_INIT)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCC)
-    set(HAVE_GCC_VECTOR_EXTENSION 1)
+    set(HAVE_GCC_VECTOR_EXTENSIONS 1)
 endif()
 
 check_include_file( "dlfcn.h" HAVE_DLFCN_H )
