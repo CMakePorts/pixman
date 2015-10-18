@@ -60,6 +60,16 @@ target_link_libraries(composite-traps-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pi
 add_test(composite-traps-test composite-traps-test)
 set_tests_properties (composite-traps-test PROPERTIES TIMEOUT 100)
 
+add_executable(cover-test cover-test.c $<TARGET_OBJECTS:tests_core>)
+target_link_libraries(cover-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_static)
+add_test(cover-test cover-test)
+set_tests_properties (cover-test PROPERTIES TIMEOUT 100)
+
+add_executable(fence-image-self-test fence-image-self-test.c $<TARGET_OBJECTS:tests_core>)
+target_link_libraries(fence-image-self-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_static)
+add_test(fence-image-self-test fence-image-self-test)
+set_tests_properties (fence-image-self-test PROPERTIES TIMEOUT 100)
+
 add_executable(fetch-test fetch-test.c $<TARGET_OBJECTS:tests_core>)
 target_link_libraries(fetch-test ${SYSTEM_LIBRARIES} ${PNG_LIBRARY} pixman-1_static)
 add_test(fetch-test fetch-test)
